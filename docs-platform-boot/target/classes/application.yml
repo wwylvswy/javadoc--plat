@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: docs-platform
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:./docs-platform.db
+    username: ""
+    password: ""
+    hikari:
+      connection-init-sql: PRAGMA foreign_keys=ON
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    mixed: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+logging:
+  level:
+    root: INFO
+    com.company.docs: INFO
